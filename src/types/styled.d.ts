@@ -1,0 +1,14 @@
+import "styled-components";
+
+declare module "styled-components" {
+    export interface DefaulTheme {
+        name: string;
+        colors: {
+            h1: string;
+            h2: string;
+            h3: string;
+            h4: string;
+            h6: string;
+        }
+    }
+}
