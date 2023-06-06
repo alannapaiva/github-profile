@@ -1,30 +1,22 @@
 import { useState } from "react";
 import { Container } from "./Header.styles"
-import { onThemeChange } from "../../utils/ModeTheme";
-import {Theme } from "../../Theme/Theme";
+import React, { useContext } from 'react';
+import { ThemeContext } from "@/context/context";
 
 export const Header : React.FC = () =>{
-  const [changeTheme, setchangeTheme] = useState(false);
-  const [buttonMode, setButtonMode] = useState<buttonMode>("lightMode")
-
+  const [buttonMode, setButtonMode] = useState("lightMode")
+  const { setTheme } = useContext(ThemeContext)
   const ontheme = ()=>{
-    if(buttonMode===false){
-      return setButtonMode(true);
-    }else{
-      return setButtonMode(false);
-    };
-  }  
+    setButtonMode(buttonMode === "lightMode" ? "darkMode" : "lightMode");
+    if(buttonMode=="lightMode") setTheme("darkTheme");
+    if(buttonMode=="darkMode") setTheme("lightTheme");
+  }
   return(
-    <Theme>
-      <Container>
-        <div className="lightThemeDiv">  
-          <label className="switch" >
-              <input type="checkbox" onClick={()=>ontheme()}/>
-              <span className="slider round"></span>
-          </label>
-        </div>
-        {/* <h1 className="title-header">GitHub Profiles</h1> */}
-      </Container>
-    </Theme>
-  );
+    <Container>
+        <label className="switch" >
+          <input type="checkbox" onClick={()=>ontheme()}/>
+          <span className="slider round"></span>
+        </label>
+    </Container>
+  )
 }
