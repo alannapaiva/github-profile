@@ -11,6 +11,7 @@ import {
   LoginProfile,
   BioProfile,
   DivItems,
+  WarningUser,
 } from "./HomePage.styles";
 import { Header } from "./../components/Header";
 import { useContext, useState } from "react";
@@ -19,7 +20,7 @@ import { Repositore } from "./../components/Repositore";
 import { Link } from "@mui/material";
 import { Following } from "@/components/Following";
 import { Followers } from "@/components/Followers";
-import { ThemeContext, ThemeProvider } from "@/context/context";
+import { ThemeContext } from "@/context/context";
 
 export const HomePage: React.FC = () => {
   const [user, setUser] = useState<Userprops | null>(null);
@@ -30,20 +31,8 @@ export const HomePage: React.FC = () => {
   const [following, setFollowing] = useState<any>([]);
   const [stars, setStars] = useState<any>([]);
   const [verifyUser, setVerifyUser] = useState(false);
-  const [buttonMode, setButtonMode] = useState(false);
-  const [selectColor, setSelectColor] = useState("#E7E7E7");
   const { themeMode } = useContext(ThemeContext);
 
-  const ontheme = () => {
-    console.log(buttonMode);
-    if (buttonMode === false) {
-      setSelectColor("#1E2228");
-      return setButtonMode(true);
-    } else {
-      setSelectColor("#E7E7E7");
-      return setButtonMode(false);
-    }
-  };
 
   const loadUser = async (userName: string) => {
     const res = await fetch(`https://api.github.com/users/${userName}`);
@@ -141,12 +130,15 @@ export const HomePage: React.FC = () => {
             <div>
               <input
                 placeholder="Inform user name"
-                onChange={(e) => setUser(e.target.value)}
+                onChange={(e) => setUser(e.target.value) }
               />
               <button onClick={() => findAll(user)}>
                 <p>Search</p>
               </button>
             </div>
+            <WarningUser>
+               <p style={(axiosUser?.login || verifyUser===false)?{display:"none"}:{display:"block",color:"red"}}>USUÁRIO NÃO ENCONTRADO</p>
+           </WarningUser>
             <DivProfile onLoad={() => onSelectOption(0)}>
               <div>
                 <img src={axiosUser?.avatar_url} alt="profileImg" />

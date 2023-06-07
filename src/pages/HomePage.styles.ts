@@ -175,3 +175,9 @@ export const DivItems = styled("div")(({theme}) =>({
     alignItems:"center",
   },
 }));
+
+export const WarningUser = styled("div")({
+  width:"100%",
+  display:"flex",
+  justifyContent:"center",
+});
