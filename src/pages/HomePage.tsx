@@ -15,7 +15,6 @@ import {
 } from "./HomePage.styles";
 import { Header } from "./../components/Header";
 import { useContext, useState } from "react";
-import { Userprops } from "../utils/user";
 import { Repositore } from "./../components/Repositore";
 import { Link } from "@mui/material";
 import { Following } from "@/components/Following";
@@ -23,7 +22,7 @@ import { Followers } from "@/components/Followers";
 import { ThemeContext } from "@/context/context";
 
 export const HomePage: React.FC = () => {
-  const [user, setUser] = useState<Userprops | null>(null);
+  const [user, setUser] = useState<any>(null);
   const [axiosUser, setAxiosUser] = useState<any>([]);
   const [option, setOption] = useState(0);
   const [repositore, setRepositore] = useState<any>([]);
@@ -35,31 +34,12 @@ export const HomePage: React.FC = () => {
 
 
   const loadUser = async (userName: string) => {
-    const res = await fetch(`https://api.github.com/users/${userName}`);
-    const data = await res.json();
-    const {
-      avatar_url,
-      login,
-      bio,
-      html_url,
-      public_repos,
-      name,
-      location,
-      followers,
-      following,
-    } = data;
-    const userData: Userprops = {
-      avatar_url,
-      name,
-      html_url,
-      login,
-      location,
-      followers,
-      following,
-      public_repos,
-      bio,
-    };
-    setAxiosUser(userData);
+    axios
+    .get(`https://api.github.com/users/${userName}`)
+    .then((response: any) => {
+      const userL = response.data;
+      setAxiosUser(userL);
+    });
     setVerifyUser(true);
   };
 
@@ -96,12 +76,12 @@ export const HomePage: React.FC = () => {
       });
   };
 
-  const findAll = (user: string) => {
-    loadUser(user);
-    loadFollowers(user);
-    loadFollowings(user);
-    loadRepositores(user);
-    loadStars(user);
+  const findAll= async(userName:string)=>{
+    loadUser(userName);
+    loadFollowers(userName);
+    loadFollowings(userName);
+    loadRepositores(userName);
+    loadStars(userName);
     onSelectOption(0);
   };
 
@@ -138,10 +118,10 @@ export const HomePage: React.FC = () => {
             </div>
             <WarningUser>
                <p style={(axiosUser?.login || verifyUser===false)?{display:"none"}:{display:"block",color:"red"}}>USUÁRIO NÃO ENCONTRADO</p>
-           </WarningUser>
+            </WarningUser>
             <DivProfile onLoad={() => onSelectOption(0)}>
               <div>
-                <img src={axiosUser?.avatar_url} alt="profileImg" />
+                <img src={axiosUser?.avatar_url} style={axiosUser?.avatar_url?{display:"block"}:{display:"none"}} alt="profileImg" />
                 <Link
                   href={axiosUser?.html_url}
                   target="_blank"
