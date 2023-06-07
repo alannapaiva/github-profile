@@ -213,7 +213,7 @@ export const HomePage: React.FC = () => {
                     {followers.map((projects: any) => (
                       <li>
                         <Followers
-                          findUser={findAll}
+                          findAll={findAll}
                           avatar={projects.avatar_url}
                           login={projects.login}
                         />
@@ -228,7 +228,7 @@ export const HomePage: React.FC = () => {
                     {following.map((projects: any) => (
                       <li>
                         <Following
-                          findUser={findAll}
+                          findAll={findAll}
                           avatar={projects.avatar_url}
                           login={projects.login}
                         />
