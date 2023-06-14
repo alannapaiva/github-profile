@@ -109,7 +109,7 @@ export const OptionSelected = styled("div")({
   flexDirection: "column",
   ul: {
     margin:0,
-    maxHeight: "380px",
+    maxHeight: "340px",
     overflowY: "auto",
     "::-webkit-scrollbar": {
       width: "10px",
@@ -125,6 +125,7 @@ export const DivProfile = styled ("div")({
   display:"flex",
   justifyContent:"center",
   maxWidth:"450px",
+  cursor: "pointer",
   img:{
     marginTop:"65px",
     borderRadius: "80px",
@@ -133,7 +134,10 @@ export const DivProfile = styled ("div")({
     border: "1px solid #5E30E6",
     width: "150px",
     marginLeft: "100px",
-  }
+  },
+  "h1:hover": {
+    color: "#5E30E6",
+  },
 });
 
 export const UserName = styled("h1")({

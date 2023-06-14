@@ -59,6 +59,7 @@ export const Theme = styled("div")({
     div:{
       backgroundColor: "#000",
       color: "#fff",
+      borderRadius: "20px",
     },
     button:{
       backgroundColor:"#000",

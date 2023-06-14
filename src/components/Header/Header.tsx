@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container } from "./Header.styles"
+import { Container, HeaderContent } from "./Header.styles"
 import React, { useContext } from 'react';
 import { ThemeContext } from "@/context/context";
 
@@ -13,10 +13,13 @@ export const Header : React.FC = () =>{
   }
   return(
     <Container>
+      <HeaderContent> 
+        <h1 className="header-title">GitHub Profiles</h1>
         <label className="switch" >
           <input type="checkbox" onClick={()=>ontheme()}/>
           <span className="slider round"></span>
         </label>
+      </HeaderContent>  
     </Container>
   )
 }

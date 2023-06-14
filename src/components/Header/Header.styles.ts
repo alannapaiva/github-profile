@@ -1,3 +1,4 @@
+import { HeaderContent } from './Header.styles';
 import { styled } from "@mui/system";
 
 export const Container = styled("div")({
@@ -9,13 +10,11 @@ export const Container = styled("div")({
     top: "25px",
   },
   
-  ".title-header": {
-    display: "flex",
-    alignItems: "center",
-    margin: 0,
-    marginleft: "40px",
-    fontSize: "24px",
+  ".header-title": {
+    fontSize: "1.875em",
     fontFamily: "Arial",
+    marginLeft: "3rem",
+    marginTop: "1rem",
   },
 
    ".switch ": {
@@ -69,8 +68,16 @@ export const Container = styled("div")({
   "& .slider.round:before": {
     borderRadius: "50%",
   },
-  ".title-header ": {
-    display: "flex",
-  }, 
+
 },
 );
+
+export const HeaderContent = styled("div")(({theme}) =>({
+  justifyContent:"space-between",
+  display:"flex",
+  [theme.breakpoints.down(900)]: {
+    display:"flex",
+    flexDirection:"column",
+  },
+}));
+
