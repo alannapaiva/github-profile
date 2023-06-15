@@ -34,13 +34,13 @@ export const HomePage: React.FC = () => {
 
 
   const loadUser = async (userName: string) => {
-    axios
-    .get(`https://api.github.com/users/${userName}`)
-    .then((response: any) => {
-      const userL = response.data;
-      setAxiosUser(userL);
-    });
-    setVerifyUser(true);
+    try { 
+      const response = await axios.get(`https://api.github.com/users/${userName}`);
+      setAxiosUser(response.data);
+      setVerifyUser(false);
+    } catch(err) { 
+      setVerifyUser(true);
+    }
   };
 
   const loadFollowers = async (userName: string) => {
@@ -116,8 +116,8 @@ export const HomePage: React.FC = () => {
                 <p>Search</p>
               </button>
             </div>
-            <WarningUser>
-               <p style={(axiosUser?.login || verifyUser===false)?{display:"none"}:{display:"block",color:"red"}}>USUÁRIO NÃO ENCONTRADO</p>
+            <WarningUser style={!verifyUser ? {display: "none"} : {}}>
+               <p style={{display:"block",color:"red"}}>USUÁRIO NÃO ENCONTRADO</p>
             </WarningUser>
             <DivProfile onLoad={() => onSelectOption(0)}>
               <div>

@@ -121,11 +121,14 @@ export const OptionSelected = styled("div")({
   },
 });
 
-export const DivProfile = styled ("div")({
+export const DivProfile =  styled("div")(({theme}) =>({
   display:"flex",
   justifyContent:"center",
   maxWidth:"450px",
   cursor: "pointer",
+  [theme.breakpoints.down(940)]: {
+    margin: "0 auto",
+  },
   img:{
     marginTop:"65px",
     borderRadius: "80px",
@@ -134,11 +137,19 @@ export const DivProfile = styled ("div")({
     border: "1px solid #5E30E6",
     width: "150px",
     marginLeft: "100px",
+    [theme.breakpoints.down(332)]: {
+      margin: "0 auto",
+      marginTop: "50px",
+    },
+    [theme.breakpoints.down(940)]: {
+      margin: "0 auto",
+      marginTop: "50px",
+    },
   },
   "h1:hover": {
     color: "#5E30E6",
   },
-});
+}));
 
 export const UserName = styled("h1")({
   margin:0,
